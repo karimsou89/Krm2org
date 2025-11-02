@@ -1,0 +1,1863 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملحقة الديوان الوطني لمحو الأمية - ولاية الجزائر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        :root {
+            --primary: #1a5c3a;
+            --primary-light: #2d7d57;
+            --primary-dark: #0f3d24;
+            --secondary: #c53030;
+            --secondary-light: #e53e3e;
+            --secondary-dark: #9b2c2c;
+            --accent: #2d7d57;
+            --light: #f7faf7;
+            --dark: #1a202c;
+            --text: #2d3748;
+        }
+        
+        body {
+            direction: rtl;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #f7faf7 0%, #edf2f7 100%);
+            color: var(--text);
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .card-3d {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: all 0.5s ease;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(5deg) rotateX(5deg) translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+        }
+        
+        .modal.active .modal-content {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(26, 92, 58, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(26, 92, 58, 0.4);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            transition: all 0.3s ease;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            border: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(197, 48, 48, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(197, 48, 48, 0.4);
+            background: linear-gradient(135deg, var(--secondary-light) 0%, var(--secondary) 100%);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+            color: var(--primary);
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 60%;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            border-radius: 2px;
+        }
+        
+        .nav-link {
+            position: relative;
+            color: var(--text);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 15px;
+            width: 100%;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(26, 92, 58, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--primary);
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            right: 30px;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            padding-right: 80px;
+        }
+        
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            right: 22px;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--secondary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 4px var(--secondary);
+        }
+        
+        .partner-logo {
+            filter: grayscale(100%);
+            transition: all 0.4s ease;
+            opacity: 0.7;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .game-card {
+            transition: all 0.4s ease;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            top: 10%;
+            right: 5%;
+            animation-duration: 25s;
+        }
+        
+        .shape-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 5%;
+            animation-duration: 20s;
+        }
+        
+        .shape-3 {
+            width: 100px;
+            height: 100px;
+            top: 40%;
+            left: 10%;
+            animation-duration: 15s;
+        }
+        
+        .interactive-btn {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .image-hover {
+            transition: all 0.5s ease;
+            overflow: hidden;
+            border-radius: 15px;
+        }
+        
+        .image-hover img {
+            transition: all 0.5s ease;
+            width: 100%;
+            height: auto;
+        }
+        
+        .image-hover:hover img {
+            transform: scale(1.1);
+        }
+        
+        .counter {
+            font-size: 3rem;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .page-section {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .page-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .page-btn {
+            transition: all 0.4s ease;
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            background: white;
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 150px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+        
+        .page-btn:hover {
+            transform: translateY(-15px);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 20px 40px rgba(26, 92, 58, 0.3);
+        }
+        
+        .page-btn i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .ai-chat-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .ai-chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+        }
+        
+        .ai-message {
+            margin: 10px 0;
+            padding: 10px 15px;
+            border-radius: 10px;
+            max-width: 80%;
+        }
+        
+        .ai-message.user {
+            background: var(--primary);
+            color: white;
+            margin-right: auto;
+        }
+        
+        .ai-message.bot {
+            background: #f1f5f9;
+            color: var(--text);
+            margin-left: auto;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            transition: width 0.5s ease;
+        }
+        
+        .floating-action-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(197, 48, 48, 0.4);
+            z-index: 100;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(197, 48, 48, 0.6);
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(26, 92, 58, 0.3);
+        }
+        
+        /* تحسينات جديدة */
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(26, 92, 58, 0.7) 0%, rgba(15, 61, 36, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .feature-card {
+            transition: all 0.4s ease;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.7) 100%);
+            z-index: 1;
+        }
+        
+        .feature-card-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .news-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .news-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .course-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .progress-ring {
+            transform: rotate(-90deg);
+        }
+        
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            text-align: center;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .achievement-badge {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .ai-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            margin: 0 auto 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .game-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .game-card {
+            width: 80px;
+            height: 80px;
+            background: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .game-card.flipped {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    
+    <!-- Floating Action Button -->
+    <div class="floating-action-btn" id="help-btn">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div class="w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white mr-4 glow">
+                    <i class="fas fa-book-open text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-2xl font-bold text-[var(--primary)]">ملحقة الديوان الوطني لمحو الأمية</h1>
+                    <p class="text-sm text-gray-600">ولاية الجزائر - منصة تعليمية تفاعلية متكاملة</p>
+                </div>
+            </div>
+            
+            <button id="menu-toggle" class="md:hidden text-[var(--primary)] text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="nav-link text-lg" data-page="home">الرئيسية</a>
+                <a href="#" class="nav-link text-lg" data-page="about">نبذة تاريخية</a>
+                <a href="#" class="nav-link text-lg" data-page="services">المصالح والخدمات</a>
+                <a href="#" class="nav-link text-lg" data-page="ai">الذكاء الاصطناعي</a>
+                <a href="#" class="nav-link text-lg" data-page="resources">الموارد التعليمية</a>
+                <a href="#" class="nav-link text-lg" data-page="games">الألعاب التعليمية</a>
+                <a href="#" class="nav-link text-lg" data-page="contact">اتصل بنا</a>
+                <button id="login-btn" class="btn-primary interactive-btn">
+                    <i class="fas fa-user mr-2"></i>تسجيل الدخول
+                </button>
+            </nav>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white/95 backdrop-blur-md py-6 px-6 shadow-xl">
+            <div class="flex flex-col space-y-6">
+                <a href="#" class="nav-link text-lg text-center" data-page="home">الرئيسية</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="about">نبذة تاريخية</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="services">المصالح والخدمات</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="ai">الذكاء الاصطناعي</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="resources">الموارد التعليمية</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="games">الألعاب التعليمية</a>
+                <a href="#" class="nav-link text-lg text-center" data-page="contact">اتصل بنا</a>
+                <button id="mobile-login-btn" class="btn-primary interactive-btn text-center py-4">
+                    <i class="fas fa-user mr-2"></i>تسجيل الدخول
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- الصفحة الرئيسية -->
+    <section id="home" class="page-section active">
+        <!-- Hero Section -->
+        <div class="min-h-screen flex items-center justify-center relative overflow-hidden hero-section">
+            <div class="absolute inset-0 bg-black/30 z-1"></div>
+            <div class="container mx-auto px-4 py-20 hero-content">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-1/2 mb-12 md:mb-0 fade-in">
+                        <h1 class="text-5xl md:text-7xl font-bold mb-8 text-white">ملحقة الديوان الوطني لمحو الأمية وتعليم الكبار</h1>
+                        <p class="text-2xl mb-10 text-white/90">منصة تعليمية تفاعلية متكاملة تواكب التطور التكنولوجي في مجال محو الأمية</p>
+                        <div class="flex flex-wrap gap-6">
+                            <button class="btn-secondary interactive-btn text-lg px-10 py-4" onclick="showPage('services')">
+                                <i class="fas fa-play-circle mr-3"></i>اكتشف خدماتنا
+                            </button>
+                            <button class="bg-white text-[var(--primary)] px-10 py-4 rounded-2xl font-bold hover:bg-gray-100 transition-all interactive-btn text-lg" onclick="showPage('ai')">
+                                <i class="fas fa-robot mr-3"></i>جرب الذكاء الاصطناعي
+                            </button>
+                        </div>
+                    </div>
+                    <div class="md:w-1/2 flex justify-center fade-in">
+                        <div class="image-hover w-full max-w-2xl glow">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="التعليم" class="w-full h-auto rounded-3xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- إحصائيات -->
+        <div class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-5xl font-bold text-center mb-20 section-title">إحصائيات حية</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+                    <div class="stat-card" onclick="showPage('about')">
+                        <div class="achievement-badge gradient-bg">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="counter" data-target="12540">0</div>
+                        <p class="text-xl mt-4 text-[var(--primary)]">دارس مسجل</p>
+                        <p class="text-sm mt-3 text-gray-500">انقر للمزيد من التفاصيل</p>
+                    </div>
+                    
+                    <div class="stat-card" onclick="showPage('services')">
+                        <div class="achievement-badge bg-[var(--secondary)]">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="counter" data-target="684">0</div>
+                        <p class="text-xl mt-4 text-[var(--primary)]">معلم ومعلمة</p>
+                        <p class="text-sm mt-3 text-gray-500">انقر للمزيد من التفاصيل</p>
+                    </div>
+                    
+                    <div class="stat-card" onclick="showPage('resources')">
+                        <div class="achievement-badge bg-[var(--accent)]">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="counter" data-target="42">0</div>
+                        <p class="text-xl mt-4 text-[var(--primary)]">مركز تعليمي</p>
+                        <p class="text-sm mt-3 text-gray-500">انقر للمزيد من التفاصيل</p>
+                    </div>
+                    
+                    <div class="stat-card" onclick="showPage('about')">
+                        <div class="achievement-badge bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)]">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="counter" data-target="89">0</div>
+                        <p class="text-xl mt-4 text-[var(--primary)]">نسبة النجاح %</p>
+                        <p class="text-sm mt-3 text-gray-500">انقر للمزيد من التفاصيل</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الأقسام الرئيسية -->
+        <div class="py-20 bg-gradient-to-br from-[var(--light)] to-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-5xl font-bold text-center mb-20 section-title">استكشف منصتنا المتكاملة</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="page-btn" data-page="about">
+                        <i class="fas fa-history"></i>
+                        <span class="text-xl">نبذة تاريخية شاملة</span>
+                        <p class="text-sm mt-3 text-gray-600">تعرف على مسيرة محو الأمية في الجزائر</p>
+                    </div>
+                    
+                    <div class="page-btn" data-page="services">
+                        <i class="fas fa-cogs"></i>
+                        <span class="text-xl">مصالح وخدمات الملحقة</span>
+                        <p class="text-sm mt-3 text-gray-600">اكتشف جميع خدماتنا وبرامجنا</p>
+                    </div>
+                    
+                    <div class="page-btn" data-page="registration">
+                        <i class="fas fa-user-plus"></i>
+                        <span class="text-xl">نظام التسجيل الإلكتروني</span>
+                        <p class="text-sm mt-3 text-gray-600">سجل الآن في برامج محو الأمية</p>
+                    </div>
+                    
+                    <div class="page-btn" data-page="resources">
+                        <i class="fas fa-book"></i>
+                        <span class="text-xl">المناهج والكتب التفاعلية</span>
+                        <p class="text-sm mt-3 text-gray-600">موارد تعليمية متنوعة ومجانية</p>
+                    </div>
+                    
+                    <div class="page-btn" data-page="ai">
+                        <i class="fas fa-robot"></i>
+                        <span class="text-xl">مساعد الذكاء الاصطناعي</span>
+                        <p class="text-sm mt-3 text-gray-600">تجربة تعلم ذكية ومخصصة</p>
+                    </div>
+                    
+                    <div class="page-btn" data-page="games">
+                        <i class="fas fa-gamepad"></i>
+                        <span class="text-xl">الألعاب التعليمية</span>
+                        <p class="text-sm mt-3 text-gray-600">تعلم بطريقة ممتعة وتفاعلية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الدورات التعليمية -->
+        <div class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-5xl font-bold text-center mb-20 section-title">أحدث الدورات التعليمية</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="دورة القراءة">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">دورة القراءة للمبتدئين</h3>
+                            <p class="text-gray-600 mb-4">تعلم أساسيات القراءة باللغة العربية من الصفر</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">12 درسًا</span>
+                                <button class="btn-primary py-2 px-4 text-sm">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="دورة الكتابة">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">دورة الكتابة الأساسية</h3>
+                            <p class="text-gray-600 mb-4">إتقان مهارات الكتابة باللغة العربية خطوة بخطوة</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">15 درسًا</span>
+                                <button class="btn-primary py-2 px-4 text-sm">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="course-card">
+                        <img src="https://images.unsplash.com/photo-1588072432836-4b2f3f8d7a8d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="دورة الحساب">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-3 text-[var(--primary)]">دورة الحساب اليومي</h3>
+                            <p class="text-gray-600 mb-4">تعلم العمليات الحسابية الأساسية للحياة اليومية</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-500">10 دروس</span>
+                                <button class="btn-primary py-2 px-4 text-sm">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <button class="btn-secondary text-lg px-10 py-4" onclick="showPage('resources')">
+                        <i class="fas fa-book-open mr-3"></i>استكشف جميع الدورات
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- آراء المستخدمين -->
+        <div class="py-20 bg-gradient-to-br from-[var(--light)] to-gray-100">
+            <div class="container mx-auto px-4">
+                <h2 class="text-5xl font-bold text-center mb-20 section-title">آراء متعلمينا</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">أحمد بوعزة</h4>
+                                <p class="text-gray-500">دارس في المستوى الثاني</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            "بفضل هذه المنصة استطعت تعلم القراءة والكتابة في وقت قصير. الطريقة التفاعلية ساعدتني كثيرًا في فهم الدروس."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">فاطمة الزهراء</h4>
+                                <p class="text-gray-500">دارسة في المستوى الأول</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            "لم أتوقع أن أتعلم القراءة في هذا العمر. المنصة سهلة الاستخدام والمعلمون متعاونون جدًا."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-[var(--accent)] rounded-full flex items-center justify-center text-white mr-4">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">محمد صالح</h4>
+                                <p class="text-gray-500">معلم في الملحقة</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mb-4">
+                            "التجربة رائعة! المنصة سهلت علينا عملية التعليم وجعلت الدروس أكثر تفاعلية وجاذبية للمتعلمين."
+                        </p>
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة نبذة تاريخية -->
+    <section id="about" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">نبذة تاريخية شاملة</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
+                <div class="fade-in">
+                    <div class="bg-white rounded-3xl p-10 card-3d shadow-2xl">
+                        <h3 class="text-3xl font-bold mb-6 text-[var(--primary)]">الديوان الوطني لمحو الأمية وتعليم الكبار</h3>
+                        <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                            تأسس الديوان الوطني لمحو الأمية وتعليم الكبار في إطار الجهود الوطنية لمكافحة الأمية في الجزائر. 
+                            يهدف الديوان إلى تنظيم وتنسيق جهود محو الأمية على المستوى الوطني، وتطوير برامج تعليمية تلبي احتياجات الكبار.
+                        </p>
+                        <div class="image-hover mt-6">
+                            <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="التعليم" class="w-full h-64 object-cover rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="bg-white rounded-3xl p-10 card-3d shadow-2xl">
+                        <h3 class="text-3xl font-bold mb-6 text-[var(--primary)]">تاريخ ملحقة ولاية الجزائر</h3>
+                        <p class="text-gray-700 mb-6 text-lg leading-relaxed">
+                            تأسست ملحقة ولاية الجزائر في إطار توسع شبكة ملحقات الديوان الوطني لمحو الأمية عبر مختلف ولايات الوطن. 
+                            تهدف الملحقة إلى تنفيذ استراتيجيات وبرامج محو الأمية على مستوى ولاية الجزائر.
+                        </p>
+                        <div class="image-hover mt-6">
+                            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="الفصول الدراسية" class="w-full h-64 object-cover rounded-2xl">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-3xl p-10 shadow-2xl">
+                <h3 class="text-4xl font-bold mb-12 text-center text-[var(--dark)]">مجهودات الدولة الجزائرية في مكافحة الأمية</h3>
+                
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <h4 class="text-2xl font-bold mb-4 text-[var(--primary)]">فترة ما بعد الاستقلال</h4>
+                        <p class="text-gray-700 text-lg">
+                            بعد الاستقلال، أولت الدولة الجزائرية أهمية كبرى لمكافحة الأمية باعتبارها ركيزة أساسية للتنمية. 
+                            تم إطلاق حملات وطنية واسعة لمحو الأمية استهدفت مختلف فئات المجتمع.
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <h4 class="text-2xl font-bold mb-4 text-[var(--primary)]">التسعينيات</h4>
+                        <p class="text-gray-700 text-lg">
+                            شهدت هذه الفترة تطوير برامج متخصصة لمحو الأمية، وإنشاء هياكل مؤسساتية للإشراف على جهود محو الأمية، 
+                            بما في ذلك تأسيس الديوان الوطني لمحو الأمية وتعليم الكبار.
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <h4 class="text-2xl font-bold mb-4 text-[var(--primary)]">الألفية الجديدة</h4>
+                        <p class="text-gray-700 text-lg">
+                            تم تعزيز جهود محو الأمية من خلال إدماج التكنولوجيات الحديثة، وتطوير مناهج متكاملة، 
+                            وتوسيع شبكة الملحقات الولائية لتغطية مختلف مناطق الوطن.
+                        </p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <h4 class="text-2xl font-bold mb-4 text-[var(--primary)]">الجهود الحالية</h4>
+                        <p class="text-gray-700 text-lg">
+                            تواصل الدولة بذل جهود كبيرة لمكافحة الأمية من خلال برامج مستدامة، وشراكات مع منظمات المجتمع المدني، 
+                            واستخدام أساليب تعليمية مبتكرة تلبي احتياجات المتعلمين الكبار.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة المصالح والخدمات -->
+    <section id="services" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">مصالح وخدمات الملحقة</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-3xl p-8 card-3d">
+                    <div class="w-24 h-24 gradient-bg rounded-full flex items-center justify-center text-white mb-6 mx-auto glow">
+                        <i class="fas fa-broadcast-tower text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-[var(--primary)]">مصلحة الوسائل والإعلام والاتصال</h3>
+                    <p class="text-gray-600 mb-6 text-center text-lg">
+                        تهتم هذه المصلحة بتوفير الوسائل التعليمية والإعلامية اللازمة لنجاح برامج محو الأمية
+                    </p>
+                    <button class="btn-primary interactive-btn w-full text-lg py-4" onclick="showServiceDetail('media')">
+                        <span>اضغط هنا للتفاصيل</span>
+                        <i class="fas fa-arrow-left mr-3"></i>
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-50 to-green-100 rounded-3xl p-8 card-3d">
+                    <div class="w-24 h-24 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white mb-6 mx-auto glow">
+                        <i class="fas fa-chalkboard-teacher text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-[var(--primary)]">مصلحة التكوين</h3>
+                    <p class="text-gray-600 mb-6 text-center text-lg">
+                        تهدف هذه المصلحة إلى تأهيل وتكوين المعلمين والمشرفين على برامج محو الأمية
+                    </p>
+                    <button class="btn-secondary interactive-btn w-full text-lg py-4" onclick="showServiceDetail('training')">
+                        <span>اضغط هنا للتفاصيل</span>
+                        <i class="fas fa-arrow-left mr-3"></i>
+                    </button>
+                </div>
+                
+                <div class="bg-gradient-to-br from-amber-50 to-amber-100 rounded-3xl p-8 card-3d">
+                    <div class="w-24 h-24 bg-[var(--accent)] rounded-full flex items-center justify-center text-white mb-6 mx-auto glow">
+                        <i class="fas fa-calculator text-3xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-center text-[var(--primary)]">مصلحة المحاسبة</h3>
+                    <p class="text-gray-600 mb-6 text-center text-lg">
+                        تتولى هذه المصلحة إدارة الشؤون المالية للملحقة ومتابعة الميزانيات
+                    </p>
+                    <button class="btn-primary interactive-btn w-full text-lg py-4" onclick="showServiceDetail('accounting')">
+                        <span>اضغط هنا للتفاصيل</span>
+                        <i class="fas fa-arrow-left mr-3"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الذكاء الاصطناعي -->
+    <section id="ai" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">مساعد الذكاء الاصطناعي للتعلم</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="fade-in">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                        <h3 class="text-3xl font-bold mb-6 text-[var(--primary)]">نظام التعلم الذكي المتكامل</h3>
+                        <p class="text-gray-700 mb-8 text-lg">
+                            مساعدنا الذكي يستخدم أحدث تقنيات الذكاء الاصطناعي لتقديم تجربة تعلم مخصصة تناسب احتياجات كل متعلم. 
+                            يمكنه تحليل مستوى المتعلم وتقديم توصيات مخصصة وتحسين نتائج التعلم.
+                        </p>
+                        
+                        <div class="ai-avatar floating">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center p-4 bg-blue-50 rounded-xl">
+                                <i class="fas fa-robot text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">تقييم ذكي للمستوى</h4>
+                                    <p class="text-gray-600">تحليل دقيق لمستوى المتعلم الحالي</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-green-50 rounded-xl">
+                                <i class="fas fa-chart-line text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">تتبع التقدم</h4>
+                                    <p class="text-gray-600">مراقبة التقدم وتقديم تقارير مفصلة</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-purple-50 rounded-xl">
+                                <i class="fas fa-lightbulb text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">توصيات مخصصة</h4>
+                                    <p class="text-gray-600">خطط تعلم شخصية تناسب كل متعلم</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="ai-chat-container">
+                        <h4 class="text-xl font-bold mb-4 text-[var(--primary)]">محادثة مع المساعد الذكي</h4>
+                        <div class="ai-chat-messages" id="ai-chat-messages">
+                            <div class="ai-message bot">
+                                مرحباً! أنا مساعدك الذكي للتعلم. كيف يمكنني مساعدتك اليوم؟
+                            </div>
+                        </div>
+                        <div class="flex space-x-2">
+                            <input type="text" id="ai-chat-input" placeholder="اكتب سؤالك هنا..." class="flex-1 p-3 border rounded-lg">
+                            <button class="btn-primary" onclick="sendAIMessage()">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الموارد التعليمية -->
+    <section id="resources" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">الموارد التعليمية الشاملة</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                <div class="bg-white rounded-3xl p-8 card-3d shadow-xl">
+                    <div class="w-20 h-20 bg-[var(--primary)] rounded-full flex items-center justify-center text-white mb-6 glow">
+                        <i class="fas fa-book text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">منهج محو الأمية - المستوى الأول</h3>
+                    <p class="text-gray-600 mb-6">المنهج الأساسي لمحو الأمية للمبتدئين مع تمارين تفاعلية</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">حجم الملف: 4.2 MB</span>
+                        <span class="text-sm text-gray-500">التنزيلات: 1,245</span>
+                    </div>
+                    <button class="btn-primary interactive-btn w-full text-lg py-4">
+                        <i class="fas fa-download mr-3"></i>تحميل PDF
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 card-3d shadow-xl">
+                    <div class="w-20 h-20 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white mb-6 glow">
+                        <i class="fas fa-book-open text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">منهج محو الأمية - المستوى الثاني</h3>
+                    <p class="text-gray-600 mb-6">المنهج المتوسط لمحو الأمية مع أنشطة تطبيقية</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">حجم الملف: 5.1 MB</span>
+                        <span class="text-sm text-gray-500">التنزيلات: 892</span>
+                    </div>
+                    <button class="btn-secondary interactive-btn w-full text-lg py-4">
+                        <i class="fas fa-download mr-3"></i>تحميل PDF
+                    </button>
+                </div>
+                
+                <div class="bg-white rounded-3xl p-8 card-3d shadow-xl">
+                    <div class="w-20 h-20 bg-[var(--accent)] rounded-full flex items-center justify-center text-white mb-6 glow">
+                        <i class="fas fa-user-graduate text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">دليل المعلم الشامل</h3>
+                    <p class="text-gray-600 mb-6">دليل إرشادي متكامل للمعلمين في مجال محو الأمية</p>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-sm text-gray-500">حجم الملف: 3.8 MB</span>
+                        <span class="text-sm text-gray-500">التنزيلات: 1,567</span>
+                    </div>
+                    <button class="btn-primary interactive-btn w-full text-lg py-4">
+                        <i class="fas fa-download mr-3"></i>تحميل PDF
+                    </button>
+                </div>
+            </div>
+            
+            <!-- فيديوهات تعليمية -->
+            <div class="mt-20">
+                <h3 class="text-4xl font-bold text-center mb-12 text-[var(--primary)]">فيديوهات تعليمية</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="فيديو تعليمي" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="فيديو تعليمي" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الألعاب التعليمية -->
+    <section id="games" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">الألعاب التعليمية</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="fade-in">
+                    <div class="bg-white rounded-3xl p-8 shadow-2xl">
+                        <h3 class="text-3xl font-bold mb-6 text-[var(--primary)]">تعلم من خلال اللعب</h3>
+                        <p class="text-gray-700 mb-8 text-lg">
+                            الألعاب التعليمية تجعل عملية التعلم أكثر متعة وفعالية. استمتع بتعلم القراءة والكتابة والحساب من خلال ألعاب تفاعلية مصممة خصيصًا لمتعلمي محو الأمية.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-center p-4 bg-blue-50 rounded-xl">
+                                <i class="fas fa-puzzle-piece text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">ألعاب تركيب الكلمات</h4>
+                                    <p class="text-gray-600">تعلم تكوين الكلمات من الحروف</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-green-50 rounded-xl">
+                                <i class="fas fa-calculator text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">ألعاب الحساب</h4>
+                                    <p class="text-gray-600">تمرن على العمليات الحسابية الأساسية</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-center p-4 bg-purple-50 rounded-xl">
+                                <i class="fas fa-book text-2xl text-[var(--primary)] ml-4"></i>
+                                <div>
+                                    <h4 class="font-bold text-lg">ألعاب القراءة</h4>
+                                    <p class="text-gray-600">حسّن مهارات القراءة من خلال الألعاب</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <div class="game-container">
+                        <h4 class="text-xl font-bold mb-4 text-[var(--primary)]">لعبة تركيب الكلمات</h4>
+                        <p class="text-gray-600 mb-6">اسحب الحروف لتكوين الكلمة الصحيحة</p>
+                        
+                        <div class="game-board" id="word-game">
+                            <!-- سيتم إنشاء اللعبة ديناميكيًا -->
+                        </div>
+                        
+                        <button class="btn-primary mt-6" onclick="startWordGame()">
+                            <i class="fas fa-redo mr-3"></i>ابدأ لعبة جديدة
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الاتصال -->
+    <section id="contact" class="page-section">
+        <div class="container mx-auto px-4 py-20">
+            <h2 class="text-5xl font-bold text-center mb-20 section-title">اتصل بنا</h2>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold mb-8 text-[var(--primary)]">معلومات الاتصال</h3>
+                    
+                    <div class="space-y-8">
+                        <div class="flex items-start">
+                            <div class="w-16 h-16 bg-[var(--primary)] rounded-full flex items-center justify-center text-white mr-6">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">العنوان</h4>
+                                <p class="text-gray-600 text-lg">شارع العربي بن مهيدي، الجزائر العاصمة</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-16 h-16 bg-[var(--secondary)] rounded-full flex items-center justify-center text-white mr-6">
+                                <i class="fas fa-phone text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">رقم الهاتف</h4>
+                                <p class="text-gray-600 text-lg">023 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-16 h-16 bg-[var(--accent)] rounded-full flex items-center justify-center text-white mr-6">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">البريد الإلكتروني</h4>
+                                <p class="text-gray-600 text-lg">contact@alphabetisation.dz</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-16 h-16 bg-gradient-to-br from-[var(--primary)] to-[var(--secondary)] rounded-full flex items-center justify-center text-white mr-6">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-xl mb-2">ساعات العمل</h4>
+                                <p class="text-gray-600 text-lg">الأحد إلى الخميس: 8:00 - 16:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-3xl font-bold mb-8 text-[var(--primary)]">أرسل رسالة</h3>
+                    
+                    <form class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <input type="text" placeholder="الاسم الكامل" class="p-4 border rounded-xl form-input text-lg">
+                            <input type="email" placeholder="البريد الإلكتروني" class="p-4 border rounded-xl form-input text-lg">
+                        </div>
+                        
+                        <input type="text" placeholder="الموضوع" class="p-4 border rounded-xl form-input text-lg">
+                        
+                        <textarea rows="6" placeholder="الرسالة" class="p-4 border rounded-xl form-input text-lg"></textarea>
+                        
+                        <button type="submit" class="btn-primary interactive-btn w-full text-lg py-4">
+                            <i class="fas fa-paper-plane mr-3"></i>إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">ملحقة الديوان الوطني لمحو الأمية</h3>
+                    <p class="mb-6">منصة تعليمية تفاعلية متكاملة تواكب التطور التكنولوجي في مجال محو الأمية وتعليم الكبار.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-all">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">روابط سريعة</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="hover:text-gray-300 transition-all" data-page="home">الرئيسية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all" data-page="about">نبذة تاريخية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all" data-page="services">المصالح والخدمات</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all" data-page="resources">الموارد التعليمية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all" data-page="contact">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">خدماتنا</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#" class="hover:text-gray-300 transition-all">التسجيل الإلكتروني</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all">المناهج التفاعلية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all">الألعاب التعليمية</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all">التقييم الذاتي</a></li>
+                        <li><a href="#" class="hover:text-gray-300 transition-all">الدعم الفني</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl font-bold mb-6">اتصل بنا</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 ml-3"></i>
+                            <span>شارع العربي بن مهيدي، الجزائر العاصمة</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone ml-3"></i>
+                            <span>023 45 67 89</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope ml-3"></i>
+                            <span>contact@alphabetisation.dz</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/20 mt-12 pt-8 text-center">
+                <p>© 2023 ملحقة الديوان الوطني لمحو الأمية - ولاية الجزائر. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal للتسجيل -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-[var(--primary)]">تسجيل الدخول</h2>
+                <button id="close-modal" class="text-2xl text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form class="space-y-6">
+                <div>
+                    <label class="block text-gray-700 mb-2">اسم المستخدم</label>
+                    <input type="text" class="form-input" placeholder="أدخل اسم المستخدم">
+                </div>
+                
+                <div>
+                    <label class="block text-gray-700 mb-2">كلمة المرور</label>
+                    <input type="password" class="form-input" placeholder="أدخل كلمة المرور">
+                </div>
+                
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="remember" class="ml-2">
+                        <label for="remember">تذكرني</label>
+                    </div>
+                    <a href="#" class="text-[var(--primary)] hover:underline">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="btn-primary w-full py-4">تسجيل الدخول</button>
+                
+                <div class="text-center">
+                    <p class="text-gray-600">ليس لديك حساب؟ <a href="#" class="text-[var(--primary)] font-bold hover:underline">سجل الآن</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal للخدمات -->
+    <div id="service-modal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="service-modal-title" class="text-3xl font-bold text-[var(--primary)]">تفاصيل الخدمة</h2>
+                <button id="close-service-modal" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div id="service-modal-content">
+                <!-- سيتم تحميل المحتوى هنا -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // وظائف JavaScript للتفاعل
+        document.addEventListener('DOMContentLoaded', function() {
+            // تفعيل القائمة المتنقلة
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            
+            menuToggle.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // تفعيل النافذة المنبثقة للتسجيل
+            const loginBtn = document.getElementById('login-btn');
+            const mobileLoginBtn = document.getElementById('mobile-login-btn');
+            const loginModal = document.getElementById('login-modal');
+            const closeModal = document.getElementById('close-modal');
+            
+            loginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                setTimeout(() => {
+                    loginModal.classList.add('active');
+                }, 10);
+            });
+            
+            mobileLoginBtn.addEventListener('click', function() {
+                loginModal.style.display = 'flex';
+                setTimeout(() => {
+                    loginModal.classList.add('active');
+                }, 10);
+                mobileMenu.classList.add('hidden');
+            });
+            
+            closeModal.addEventListener('click', function() {
+                loginModal.classList.remove('active');
+                setTimeout(() => {
+                    loginModal.style.display = 'none';
+                }, 400);
+            });
+            
+            // إغلاق النافذة المنبثقة عند النقر خارجها
+            window.addEventListener('click', function(event) {
+                if (event.target === loginModal) {
+                    loginModal.classList.remove('active');
+                    setTimeout(() => {
+                        loginModal.style.display = 'none';
+                    }, 400);
+                }
+                
+                if (event.target === document.getElementById('service-modal')) {
+                    document.getElementById('service-modal').classList.remove('active');
+                }
+            });
+            
+            // تفعيل أزرار التنقل بين الصفحات
+            const pageBtns = document.querySelectorAll('[data-page]');
+            pageBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const pageName = this.getAttribute('data-page');
+                    showPage(pageName);
+                });
+            });
+            
+            // تفعيل عداد الإحصائيات
+            const counters = document.querySelectorAll('.counter');
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-target');
+                const increment = target / 200;
+                let current = 0;
+                
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += increment;
+                        counter.innerText = Math.ceil(current);
+                        setTimeout(updateCounter, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                // تشغيل العد عند التمرير للقسم
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                });
+                
+                observer.observe(counter);
+            });
+            
+            // تفعيل تأثير الظهور عند التمرير
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            });
+            
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+            
+            // تفعيل زر المساعدة
+            const helpBtn = document.getElementById('help-btn');
+            helpBtn.addEventListener('click', function() {
+                showPage('ai');
+            });
+            
+            // تفعيل إغلاق modal الخدمات
+            document.getElementById('close-service-modal').addEventListener('click', function() {
+                document.getElementById('service-modal').classList.remove('active');
+            });
+        });
+        
+        // وظيفة عرض الصفحات
+        function showPage(pageName) {
+            // إخفاء جميع الصفحات
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            const targetPage = document.getElementById(pageName);
+            if (targetPage) {
+                targetPage.classList.add('active');
+                
+                // التمرير إلى أعلى الصفحة
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+            
+            // إغلاق القائمة المتنقلة إذا كانت مفتوحة
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.add('hidden');
+        }
+        
+        // تفاصيل الخدمات
+        function showServiceDetail(serviceType) {
+            const modal = document.getElementById('service-modal');
+            const modalTitle = document.getElementById('service-modal-title');
+            const modalContent = document.getElementById('service-modal-content');
+            
+            let title = '';
+            let content = '';
+            
+            switch(serviceType) {
+                case 'media':
+                    title = 'مصلحة الوسائل والإعلام والاتصال';
+                    content = `
+                        <div class="space-y-6">
+                            <div class="image-hover">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="الوسائل والإعلام" class="w-full rounded-2xl">
+                            </div>
+                            <p class="text-gray-700 text-lg">
+                                تختص هذه المصلحة بتوفير جميع الوسائل التعليمية والإعلامية اللازمة لنجاح برامج محو الأمية. 
+                                تشمل مسؤولياتها إنتاج المواد السمعية البصرية، تنظيم الحملات التوعوية، واستخدام وسائل الاتصال الحديثة لنشر ثقافة التعلم.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-[var(--primary)] mb-2">المنتجات</h4>
+                                    <ul class="list-disc pr-5 text-gray-700">
+                                        <li>مواد سمعية بصرية</li>
+                                        <li>منشورات توعوية</li>
+                                        <li>برامج إذاعية</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-[var(--primary)] mb-2">الخدمات</h4>
+                                    <ul class="list-disc pr-5 text-gray-700">
+                                        <li>حملات توعوية</li>
+                                        <li>تدريبات إعلامية</li>
+                                        <li>إدارة منصات التواصل</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="btn-primary w-full py-4 text-lg">طلب الخدمة</button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'training':
+                    title = 'مصلحة التكوين';
+                    content = `
+                        <div class="space-y-6">
+                            <div class="image-hover">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="التكوين" class="w-full rounded-2xl">
+                            </div>
+                            <p class="text-gray-700 text-lg">
+                                تهدف مصلحة التكوين إلى تأهيل وتكوين المعلمين والمشرفين على برامج محو الأمية. 
+                                تقوم بتنظيم دورات تدريبية مستمرة لتحسين كفاءاتهم وتطوير قدراتهم في مجال تعليم الكبار.
+                            </p>
+                            <div class="bg-yellow-50 p-6 rounded-xl">
+                                <h4 class="font-bold text-[var(--primary)] mb-4 text-xl">البرامج التدريبية المتاحة</h4>
+                                <div class="space-y-4">
+                                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                                        <span>دورة أساليب تعليم الكبار</span>
+                                        <button class="btn-secondary py-2 px-4">التسجيل</button>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                                        <span>برنامج التقييم والتقويم</span>
+                                        <button class="btn-secondary py-2 px-4">التسجيل</button>
+                                    </div>
+                                    <div class="flex justify-between items-center p-3 bg-white rounded-lg">
+                                        <span>ورشة الوسائل التعليمية</span>
+                                        <button class="btn-secondary py-2 px-4">التسجيل</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn-primary w-full py-4 text-lg">طلب استشارة تدريبية</button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'accounting':
+                    title = 'مصلحة المحاسبة';
+                    content = `
+                        <div class="space-y-6">
+                            <div class="image-hover">
+                                <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="المحاسبة" class="w-full rounded-2xl">
+                            </div>
+                            <p class="text-gray-700 text-lg">
+                                تتولى مصلحة المحاسبة إدارة الشؤون المالية للملحقة ومتابعة الميزانيات. 
+                                تضمن هذه المصلحة الشفافية والكفاءة في إدارة الموارد المالية لضمان استمرارية برامج محو الأمية.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-blue-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-[var(--primary)] mb-2">المهام</h4>
+                                    <ul class="list-disc pr-5 text-gray-700">
+                                        <li>إدارة الميزانية</li>
+                                        <li>المحاسبة اليومية</li>
+                                        <li>إعداد التقارير المالية</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-xl">
+                                    <h4 class="font-bold text-[var(--primary)] mb-2">الخدمات</h4>
+                                    <ul class="list-disc pr-5 text-gray-700">
+                                        <li>صرف مستحقات المعلمين</li>
+                                        <li>تسيير المصاريف التشغيلية</li>
+                                        <li>التدقيق المالي</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <button class="btn-primary w-full py-4 text-lg">طلب خدمة مالية</button>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            modalTitle.textContent = title;
+            modalContent.innerHTML = content;
+            modal.classList.add('active');
+        }
+        
+        // الذكاء الاصطناعي - المحادثة
+        function sendAIMessage() {
+            const input = document.getElementById('ai-chat-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // إضافة رسالة المستخدم
+                const userMessage = document.createElement('div');
+                userMessage.className = 'ai-message user';
+                userMessage.textContent = message;
+                document.getElementById('ai-chat-messages').appendChild(userMessage);
+                
+                // مسح حقل الإدخال
+                input.value = '';
+                
+                // محاكاة رد المساعد
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'ai-message bot';
+                    
+                    // ردود ذكية بناءً على السؤال
+                    if (message.includes('منهج') || message.includes('كتاب') || message.includes('مادة')) {
+                        botMessage.textContent = 'يمكنني مساعدتك في العثور على المناهج المناسبة. هل تبحث عن مواد للمستوى المبتدئ أم المتقدم؟';
+                    } else if (message.includes('تسجيل') || message.includes('انضم')) {
+                        botMessage.textContent = 'لتسجيل في برامجنا، يمكنك زيارة صفحة التسجيل أو الاتصال بنا على الرقم 023 45 67 89';
+                    } else if (message.includes('مساعدة') || message.includes('مساعده')) {
+                        botMessage.textContent = 'أنا هنا لمساعدتك! يمكنني الإجابة على أسئلتك حول المناهج، البرامج، التسجيل، وغيرها. ما الذي تحتاج مساعدة فيه؟';
+                    } else if (message.includes('لعبة') || message.includes('ألعاب')) {
+                        botMessage.textContent = 'لدينا ألعاب تعليمية ممتعة لتحسين مهارات القراءة والكتابة والحساب. هل تريد تجربة إحداها؟';
+                    } else {
+                        botMessage.textContent = 'شكراً على سؤالك! سأحاول مساعدتك بأفضل طريقة. هل يمكنك توضيح استفسارك أكثر؟';
+                    }
+                    
+                    document.getElementById('ai-chat-messages').appendChild(botMessage);
+                    
+                    // التمرير إلى الأسفل
+                    const chatMessages = document.getElementById('ai-chat-messages');
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+        
+        // السماح بإرسال الرسالة بالضغط على Enter
+        document.getElementById('ai-chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendAIMessage();
+            }
+        });
+        
+        // لعبة تركيب الكلمات
+        function startWordGame() {
+            const gameBoard = document.getElementById('word-game');
+            gameBoard.innerHTML = '';
+            
+            const words = ['كتاب', 'قلم', 'مدرسة', 'معلم'];
+            const currentWord = words[Math.floor(Math.random() * words.length)];
+            const letters = currentWord.split('');
+            
+            // خلط الحروف
+            const shuffledLetters = [...letters].sort(() => Math.random() - 0.5);
+            
+            // إنشاء الحروف في لوحة اللعبة
+            shuffledLetters.forEach(letter => {
+                const letterElement = document.createElement('div');
+                letterElement.className = 'game-card';
+                letterElement.textContent = letter;
+                letterElement.draggable = true;
+                letterElement.addEventListener('dragstart', handleDragStart);
+                gameBoard.appendChild(letterElement);
+            });
+            
+            // إنشاء مساحات فارغة لتركيب الكلمة
+            const wordSlots = document.createElement('div');
+            wordSlots.className = 'game-board mt-6';
+            wordSlots.id = 'word-slots';
+            
+            letters.forEach(() => {
+                const slot = document.createElement('div');
+                slot.className = 'game-card bg-gray-200';
+                slot.addEventListener('dragover', handleDragOver);
+                slot.addEventListener('drop', handleDrop);
+                wordSlots.appendChild(slot);
+            });
+            
+            gameBoard.parentNode.insertBefore(wordSlots, gameBoard.nextSibling);
+        }
+        
+        function handleDragStart(e) {
+            e.dataTransfer.setData('text/plain', e.target.textContent);
+            e.target.classList.add('opacity-50');
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            const letter = e.dataTransfer.getData('text/plain');
+            e.target.textContent = letter;
+            e.target.classList.remove('bg-gray-200');
+            e.target.classList.add('bg-[var(--primary)]', 'text-white');
+            e.target.draggable = false;
+            
+            // التحقق من اكتمال الكلمة
+            checkWordCompletion();
+        }
+        
+        function checkWordCompletion() {
+            const slots = document.getElementById('word-slots');
+            const letters = Array.from(slots.children).map(slot => slot.textContent).join('');
+            const words = ['كتاب', 'قلم', 'مدرسة', 'معلم'];
+            
+            if (words.includes(letters)) {
+                setTimeout(() => {
+                    alert('مبروك! لقد ركبت الكلمة الصحيحة: ' + letters);
+                }, 500);
+            }
+        }
+        
+        // بدء اللعبة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.getElementById('word-game')) {
+                startWordGame();
+            }
+        });
+    </script>
+</body>
+</html>
