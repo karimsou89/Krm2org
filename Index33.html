@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملحقة الديوان الوطني لمحو الأمية - ولاية الجزائر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        :root {
+            --primary: #1e8449;
+            --primary-light: #27ae60;
+            --primary-dark: #186a3b;
+            --secondary: #e74c3c;
+            --secondary-light: #ec7063;
+            --secondary-dark: #cb4335;
+            --accent: #3498db;
+            --light: #f8f9fa;
+            --dark: #2c3e50;
+            --text: #34495e;
+        }
+        
+        body {
+            direction: rtl;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+            width: 100%;
+        }
+        
+        /* تحسينات التصميم */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, rgba(30, 132, 73, 0.9) 0%, rgba(24, 106, 59, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 132, 73, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30, 132, 73, 0.4);
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            border-radius: 2px;
+        }
+        
+        /* تحسينات التنقل */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .nav-link {
+            position: relative;
+            color: var(--text);
+            font-weight: 500;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            width: 100%;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .mobile-menu.active {
+            display: block;
+        }
+        
+        .mobile-nav-link {
+            display: block;
+            padding: 15px;
+            color: var(--text);
+            text-decoration: none;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        
+        .mobile-nav-link:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+        
+        /* تحسينات الصفحات */
+        .page-section {
+            display: none;
+            padding: 100px 0;
+            min-height: 100vh;
+        }
+        
+        .page-section.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* تحسينات الشبكات */
+        .grid {
+            display: grid;
+            gap: 30px;
+        }
+        
+        .grid-1 { grid-template-columns: 1fr; }
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+        
+        /* تحسينات الإحصائيات */
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+        
+        .icon-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            font-size: 2rem;
+            color: white;
+        }
+        
+        /* تحسينات الشهادات */
+        .testimonial-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+        
+        /* تحسينات الدروس */
+        .course-card {
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .course-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+        
+        .course-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* تحسينات المحادثة */
+        .chat-container {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #e9ecef;
+            border-radius: 15px;
+        }
+        
+        .message {
+            margin: 10px 0;
+            padding: 12px 18px;
+            border-radius: 20px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+        
+        .message.user {
+            background: var(--primary);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .message.bot {
+            background: #f8f9fa;
+            color: var(--text);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            border: 1px solid #e9ecef;
+        }
+        
+        /* تحسينات الفوتر */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        /* تحسينات التجاوب */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 1140px;
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .container {
+                max-width: 960px;
+            }
+            
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                max-width: 720px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .grid-2, .grid-3, .grid-4 { 
+                grid-template-columns: 1fr; 
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .counter {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+            
+            .hero-grid {
+                grid-template-columns: 1fr !important;
+                gap: 30px !important;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .container {
+                max-width: 540px;
+                padding: 0 10px;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+        
+        /* تأثيرات إضافية */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        /* أقسام جديدة */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .resource-card {
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .resource-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 1.8rem;
+            color: white;
+        }
+        
+        .game-card {
+            text-align: center;
+            padding: 30px;
+            cursor: pointer;
+        }
+        
+        .game-card:hover {
+            transform: scale(1.05);
+        }
+        
+        /* أنماط جديدة لنظام التسجيل */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .auth-modal.active {
+            display: flex;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            transform: scale(0.8);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .auth-modal.active .auth-container {
+            transform: scale(1);
+            opacity: 1;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #e9ecef;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .auth-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 132, 73, 0.1);
+            outline: none;
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .user-profile {
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .logout-btn {
+            background: none;
+            border: none;
+            color: var(--secondary);
+            cursor: pointer;
+            padding: 5px 10px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-btn:hover {
+            background: var(--secondary);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التنقل -->
+    <nav class="navbar">
+        <div class="container">
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 0;">
+                <div style="display: flex; align-items: center;">
+                    <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 15px;">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <div>
+                        <h1 style="font-size: 1.3rem; font-weight: 700; color: var(--primary);">ملحقة الديوان الوطني لمحو الأمية</h1>
+                        <p style="font-size: 0.9rem; color: var(--text);">ولاية الجزائر</p>
+                    </div>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#" class="nav-link" data-page="home">الرئيسية</a>
+                    <a href="#" class="nav-link" data-page="about">عن المنصة</a>
+                    <a href="#" class="nav-link" data-page="courses">الدروس</a>
+                    <a href="#" class="nav-link" data-page="resources">الموارد</a>
+                    <a href="#" class="nav-link" data-page="games">الألعاب</a>
+                    <a href="#" class="nav-link" data-page="ai">المساعد الذكي</a>
+                    <a href="#" class="nav-link" data-page="contact">اتصل بنا</a>
+                    
+                    <!-- زر تسجيل الدخول / الملف الشخصي -->
+                    <div id="auth-buttons">
+                        <button class="btn btn-primary" id="login-btn">
+                            <i class="fas fa-user" style="margin-left: 8px;"></i>
+                            تسجيل الدخول
+                        </button>
+                    </div>
+                    
+                    <div class="user-profile" id="user-profile">
+                        <div class="user-avatar" id="user-avatar">م</div>
+                        <span class="user-name" id="user-name">محمد</span>
+                        <button class="logout-btn" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="mobile-menu" id="mobileMenu">
+                <a href="#" class="mobile-nav-link" data-page="home">الرئيسية</a>
+                <a href="#" class="mobile-nav-link" data-page="about">عن المنصة</a>
+                <a href="#" class="mobile-nav-link" data-page="courses">الدروس</a>
+                <a href="#" class="mobile-nav-link" data-page="resources">الموارد</a>
+                <a href="#" class="mobile-nav-link" data-page="games">الألعاب</a>
+                <a href="#" class="mobile-nav-link" data-page="ai">المساعد الذكي</a>
+                <a href="#" class="mobile-nav-link" data-page="contact">اتصل بنا</a>
+                
+                <!-- أزرار التسجيل في الموبايل -->
+                <div id="mobile-auth-buttons" style="padding: 15px;">
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 10px;" id="mobile-login-btn">
+                        <i class="fas fa-user" style="margin-left: 8px;"></i>
+                        تسجيل الدخول
+                    </button>
+                </div>
+                
+                <div class="user-profile" id="mobile-user-profile" style="display: none; padding: 15px; text-align: center;">
+                    <div class="user-avatar" style="margin: 0 auto 10px;" id="mobile-user-avatar">م</div>
+                    <span class="user-name" id="mobile-user-name">محمد</span>
+                    <button class="logout-btn" style="margin-top: 10px;" id="mobile-logout-btn">
+                        <i class="fas fa-sign-out-alt" style="margin-left: 5px;"></i>
+                        تسجيل الخروج
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- نافذة التسجيل والدخول -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">تسجيل الدخول</button>
+                <button class="auth-tab" data-tab="register">إنشاء حساب</button>
+            </div>
+            
+            <!-- نموذج تسجيل الدخول -->
+            <form class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" placeholder="أدخل كلمة المرور" required>
+                </div>
+                
+                <div class="form-options">
+                    <div class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <label for="remember">تذكرني</label>
+                    </div>
+                    <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    <i class="fas fa-sign-in-alt" style="margin-left: 8px;"></i>
+                    تسجيل الدخول
+                </button>
+            </form>
+            
+            <!-- نموذج إنشاء حساب -->
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label class="form-label">الاسم الكامل</label>
+                    <input type="text" class="form-input" placeholder="أدخل اسمك الكامل" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">البريد الإلكتروني</label>
+                    <input type="email" class="form-input" placeholder="أدخل بريدك الإلكتروني" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">كلمة المرور</label>
+                    <input type="password" class="form-input" placeholder="أنشئ كلمة مرور قوية" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">تأكيد كلمة المرور</label>
+                    <input type="password" class="form-input" placeholder="أعد إدخال كلمة المرور" required>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">نوع المستخدم</label>
+                    <select class="form-input" required>
+                        <option value="">اختر نوع المستخدم</option>
+                        <option value="student">دارس</option>
+                        <option value="teacher">معلم</option>
+                        <option value="admin">مسؤول</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <div class="remember-me">
+                        <input type="checkbox" id="agree" required>
+                        <label for="agree">أوافق على <a href="#" style="color: var(--primary);">شروط الاستخدام</a></label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-secondary" style="width: 100%;">
+                    <i class="fas fa-user-plus" style="margin-left: 8px;"></i>
+                    إنشاء حساب
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- الصفحة الرئيسية -->
+    <section id="home" class="page-section active">
+        <!-- قسم البطل -->
+        <div class="hero-section" style="padding: 150px 0; color: white;">
+            <div class="container">
+                <div class="grid grid-2 hero-grid" style="align-items: center; gap: 50px;">
+                    <div>
+                        <h1 style="font-size: 3.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2;">منصة تعليمية تفاعلية لمحو الأمية</h1>
+                        <p style="font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9;">نحو مجتمع متعلم خال من الأمية باستخدام أحدث التقنيات التعليمية</p>
+                        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                            <button class="btn btn-secondary" onclick="showPage('courses')">
+                                <i class="fas fa-play" style="margin-left: 8px;"></i>
+                                ابدأ التعلم الآن
+                            </button>
+                            <button class="btn" style="background: rgba(255,255,255,0.2); color: white; backdrop-filter: blur(10px);" onclick="showPage('about')">
+                                <i class="fas fa-info-circle" style="margin-left: 8px;"></i>
+                                تعرف علينا
+                            </button>
+                        </div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; display: inline-block;">
+                            <img src="https://images.unsplash.com/photo-1588072432836-4b2f3f8d7a8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                                 alt="التعليم" style="width: 100%; max-width: 400px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.2);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الإحصائيات -->
+        <div style="padding: 80px 0; background: white;">
+            <div class="container">
+                <h2 class="section-title">إنجازاتنا في أرقام</h2>
+                <div class="grid grid-4">
+                    <div class="card stat-card">
+                        <div class="icon-circle" style="background: var(--primary);">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="counter" data-target="12540">0</div>
+                        <p style="font-size: 1.1rem; color: var(--text);">دارس مسجل</p>
+                    </div>
+                    
+                    <div class="card stat-card">
+                        <div class="icon-circle" style="background: var(--secondary);">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                        </div>
+                        <div class="counter" data-target="684">0</div>
+                        <p style="font-size: 1.1rem; color: var(--text);">معلم ومعلمة</p>
+                    </div>
+                    
+                    <div class="card stat-card">
+                        <div class="icon-circle" style="background: var(--accent);">
+                            <i class="fas fa-school"></i>
+                        </div>
+                        <div class="counter" data-target="42">0</div>
+                        <p style="font-size: 1.1rem; color: var(--text);">مركز تعليمي</p>
+                    </div>
+                    
+                    <div class="card stat-card">
+                        <div class="icon-circle" style="background: linear-gradient(135deg, var(--primary), var(--secondary));">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="counter" data-target="89">0</div>
+                        <p style="font-size: 1.1rem; color: var(--text);">نسبة النجاح %</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- المميزات -->
+        <div style="padding: 80px 0; background: var(--light);">
+            <div class="container">
+                <h2 class="section-title">مميزات المنصة</h2>
+                <div class="features-grid">
+                    <div class="card feature-card">
+                        <div class="icon-circle floating" style="background: var(--primary); margin-bottom: 20px;">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">متاحة على جميع الأجهزة</h3>
+                        <p style="color: var(--text); line-height: 1.7;">يمكنك الوصول إلى المنصة من هاتفك، جهازك اللوحي أو حاسوبك في أي وقت ومن أي مكان</p>
+                    </div>
+                    
+                    <div class="card feature-card">
+                        <div class="icon-circle floating" style="background: var(--secondary); margin-bottom: 20px;">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">تعلم تفاعلي</h3>
+                        <p style="color: var(--text); line-height: 1.7;">ألعاب وأنشطة تفاعلية تجعل عملية التعلم ممتعة وفعالة وتزيد من معدل الاستيعاب</p>
+                    </div>
+                    
+                    <div class="card feature-card">
+                        <div class="icon-circle floating" style="background: var(--accent); margin-bottom: 20px;">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">مساعد ذكي</h3>
+                        <p style="color: var(--text); line-height: 1.7;">مساعد ذكي يجيب على أسئلتك ويساعدك في رحلة التعلم ويقدم نصائح مخصصة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- الدورات -->
+        <div style="padding: 80px 0; background: white;">
+            <div class="container">
+                <h2 class="section-title">الدورات التعليمية</h2>
+                <div class="grid grid-3">
+                    <div class="card course-card">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="القراءة" class="course-image">
+                        <div class="course-content">
+                            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة القراءة للمبتدئين</h3>
+                            <p style="color: var(--text); margin-bottom: 20px; flex: 1;">تعلم أساسيات القراءة باللغة العربية من الصفر بطريقة تفاعلية وسهلة</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent); font-weight: 600;">12 درسًا</span>
+                                <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card course-card">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="الكتابة" class="course-image">
+                        <div class="course-content">
+                            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة الكتابة الأساسية</h3>
+                            <p style="color: var(--text); margin-bottom: 20px; flex: 1;">إتقان مهارات الكتابة باللغة العربية خطوة بخطوة مع تمارين عملية</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent); font-weight: 600;">15 درسًا</span>
+                                <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card course-card">
+                        <img src="https://images.unsplash.com/photo-1588072432836-4b2f3f8d7a8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="الحساب" class="course-image">
+                        <div class="course-content">
+                            <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة الحساب اليومي</h3>
+                            <p style="color: var(--text); margin-bottom: 20px; flex: 1;">تعلم العمليات الحسابية الأساسية المستخدمة في الحياة اليومية</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="color: var(--accent); font-weight: 600;">10 دروس</span>
+                                <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 40px;">
+                    <button class="btn btn-secondary" onclick="showPage('courses')">
+                        <i class="fas fa-book-open" style="margin-left: 8px;"></i>
+                        استكشف جميع الدورات
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- الشهادات -->
+        <div style="padding: 80px 0; background: var(--light);">
+            <div class="container">
+                <h2 class="section-title">آراء متعلمينا</h2>
+                <div class="grid grid-3">
+                    <div class="card testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">أحمد بوعزة</h3>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">"بفضل هذه المنصة استطعت تعلم القراءة والكتابة في وقت قصير. الطريقة التفاعلية ساعدتني كثيرًا في فهم الدروس."</p>
+                        <div style="color: #f1c40f;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="card testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">فاطمة الزهراء</h3>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">"لم أتوقع أن أتعلم القراءة في هذا العمر. المنصة سهلة الاستخدام والمعلمون متعاونون جدًا."</p>
+                        <div style="color: #f1c40f;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="card testimonial-card">
+                        <div class="testimonial-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 10px;">محمد صالح</h3>
+                        <p style="color: var(--text); margin-bottom: 15px; font-style: italic;">"التجربة رائعة! المنصة سهلت علينا عملية التعليم وجعلت الدروس أكثر تفاعلية وجاذبية للمتعلمين."</p>
+                        <div style="color: #f1c40f;">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة عن المنصة -->
+    <section id="about" class="page-section">
+        <div class="container">
+            <h2 class="section-title">عن منصتنا</h2>
+            <div class="grid grid-2" style="align-items: center; gap: 50px; margin-bottom: 60px;">
+                <div>
+                    <h3 style="font-size: 2rem; font-weight: 700; margin-bottom: 20px; color: var(--primary);">رسالتنا وأهدافنا</h3>
+                    <p style="font-size: 1.1rem; color: var(--text); margin-bottom: 20px; line-height: 1.8;">
+                        نؤمن بأن التعليم حق للجميع بغض النظر عن العمر. منصتنا تهدف إلى توفير بيئة تعليمية تفاعلية 
+                        وممتعة لمحو الأمية بين الكبار، باستخدام أحدث التقنيات والمنهجيات التعليمية.
+                    </p>
+                    <p style="font-size: 1.1rem; color: var(--text); margin-bottom: 20px; line-height: 1.8;">
+                        نسعى لتحقيق مجتمع متعلم خال من الأمية، حيث يتمكن كل فرد من القراءة والكتابة والحساب 
+                        بشكل يمكنه من المشاركة الفعالة في بناء المجتمع.
+                    </p>
+                    <div style="display: flex; gap: 15px; margin-top: 30px; flex-wrap: wrap;">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download" style="margin-left: 8px;"></i>
+                            تحميل التطبيق
+                        </button>
+                        <button class="btn" style="background: var(--light); color: var(--primary);">
+                            <i class="fas fa-play-circle" style="margin-left: 8px;"></i>
+                            شاهد الفيديو التعريفي
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                         alt="عن المنصة" style="width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+                </div>
+            </div>
+            
+            <!-- تاريخ المنصة -->
+            <div style="background: white; border-radius: 20px; padding: 50px; margin-top: 40px;">
+                <h3 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; color: var(--primary);">تاريخ المنصة</h3>
+                <div class="grid grid-3">
+                    <div class="card" style="text-align: center;">
+                        <div class="icon-circle" style="background: var(--primary); margin-bottom: 20px;">
+                            <i class="fas fa-flag"></i>
+                        </div>
+                        <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">التأسيس</h4>
+                        <p style="color: var(--text);">تم تأسيس المنصة في عام 2020 كجزء من استراتيجية محو الأمية الوطنية</p>
+                    </div>
+                    
+                    <div class="card" style="text-align: center;">
+                        <div class="icon-circle" style="background: var(--secondary); margin-bottom: 20px;">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">النمو</h4>
+                        <p style="color: var(--text);">وصل عدد المستفيدين إلى أكثر من 12,000 دارس في مختلف ولايات الجزائر</p>
+                    </div>
+                    
+                    <div class="card" style="text-align: center;">
+                        <div class="icon-circle" style="background: var(--accent); margin-bottom: 20px;">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h4 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">الإنجازات</h4>
+                        <p style="color: var(--text);">حققنا نسبة نجاح 89% في برامج محو الأمية خلال السنوات الثلاث الماضية</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الدروس -->
+    <section id="courses" class="page-section">
+        <div class="container">
+            <h2 class="section-title">جميع الدورات التعليمية</h2>
+            
+            <div class="grid grid-3" style="margin-bottom: 40px;">
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                         alt="القراءة" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة القراءة للمبتدئين</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">تعلم أساسيات القراءة باللغة العربية من الصفر</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">12 درسًا</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                         alt="الكتابة" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة الكتابة الأساسية</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">إتقان مهارات الكتابة باللغة العربية خطوة بخطوة</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">15 درسًا</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1588072432836-4b2f3f8d7a8d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                         alt="الحساب" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة الحساب اليومي</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">تعلم العمليات الحسابية الأساسية للحياة اليومية</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">10 دروس</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- دورات إضافية -->
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="المحادثة" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة المحادثة اليومية</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">تحسين مهارات المحادثة باللغة العربية في المواقف اليومية</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">8 دروس</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="القواعد" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة القواعد الأساسية</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">تعلم قواعد اللغة العربية الأساسية بطريقة مبسطة</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">14 درسًا</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card course-card">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="الثقافة" class="course-image">
+                    <div class="course-content">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; color: var(--primary);">دورة الثقافة العامة</h3>
+                        <p style="color: var(--text); margin-bottom: 20px;">تعزيز المعرفة بالثقافة والمجتمع من خلال القراءة</p>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span style="color: var(--accent); font-weight: 600;">6 دروس</span>
+                            <button class="btn btn-primary" style="padding: 8px 20px;">ابدأ الآن</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الموارد -->
+    <section id="resources" class="page-section">
+        <div class="container">
+            <h2 class="section-title">الموارد التعليمية</h2>
+            
+            <div class="grid grid-3">
+                <div class="card resource-card">
+                    <div class="resource-icon" style="background: var(--primary);">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">الكتب الإلكترونية</h3>
+                    <p style="color: var(--text); margin-bottom: 20px;">مجموعة شاملة من الكتب التعليمية المجانية لمختلف المستويات</p>
+                    <button class="btn btn-primary">استعرض الكتب</button>
+                </div>
+                
+                <div class="card resource-card">
+                    <div class="resource-icon" style="background: var(--secondary);">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">الفيديوهات التعليمية</h3>
+                    <p style="color: var(--text); margin-bottom: 20px;">مكتبة فيديوهات تعليمية تغطي جميع جوانب محو الأمية</p>
+                    <button class="btn btn-primary">شاهد الفيديوهات</button>
+                </div>
+                
+                <div class="card resource-card">
+                    <div class="resource-icon" style="background: var(--accent);">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">أوراق العمل</h3>
+                    <p style="color: var(--text); margin-bottom: 20px;">تمارين وأوراق عمل قابلة للطباعة لممارسة المهارات</p>
+                    <button class="btn btn-primary">تحميل المصادر</button>
+                </div>
+            </div>
+            
+            <!-- قسم التحميلات -->
+            <div style="margin-top: 50px;">
+                <h3 style="text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 30px; color: var(--primary);">التحميلات المجانية</h3>
+                <div class="grid grid-2">
+                    <div class="card" style="display: flex; align-items: center; padding: 20px;">
+                        <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 20px;">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-weight: 700; margin-bottom: 5px;">دليل المعلم الشامل</h4>
+                            <p style="color: var(--text); font-size: 0.9rem;">دليل إرشادي متكامل للمعلمين في مجال محو الأمية</p>
+                        </div>
+                        <button class="btn btn-primary" style="padding: 8px 15px;">تحميل</button>
+                    </div>
+                    
+                    <div class="card" style="display: flex; align-items: center; padding: 20px;">
+                        <div style="width: 60px; height: 60px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 20px;">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <div style="flex: 1;">
+                            <h4 style="font-weight: 700; margin-bottom: 5px;">منهج المستوى الأول</h4>
+                            <p style="color: var(--text); font-size: 0.9rem;">المنهج الكامل للمستوى الأول في محو الأمية</p>
+                        </div>
+                        <button class="btn btn-primary" style="padding: 8px 15px;">تحميل</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة الألعاب -->
+    <section id="games" class="page-section">
+        <div class="container">
+            <h2 class="section-title">الألعاب التعليمية</h2>
+            
+            <div class="grid grid-3">
+                <div class="card game-card" onclick="startGame('word')">
+                    <div class="icon-circle" style="background: var(--primary); margin-bottom: 20px;">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">لعبة تركيب الكلمات</h3>
+                    <p style="color: var(--text);">تعلم تكوين الكلمات من الحروف بطريقة ممتعة</p>
+                </div>
+                
+                <div class="card game-card" onclick="startGame('math')">
+                    <div class="icon-circle" style="background: var(--secondary); margin-bottom: 20px;">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">لعبة الحساب السريع</h3>
+                    <p style="color: var(--text);">تمرن على العمليات الحسابية الأساسية</p>
+                </div>
+                
+                <div class="card game-card" onclick="startGame('memory')">
+                    <div class="icon-circle" style="background: var(--accent); margin-bottom: 20px;">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; color: var(--primary);">لعبة الذاكرة</h3>
+                    <p style="color: var(--text);">حسّن ذاكرتك وتعلم كلمات جديدة</p>
+                </div>
+            </div>
+            
+            <!-- منطقة اللعبة -->
+            <div id="game-area" style="margin-top: 50px; display: none;">
+                <div class="card" style="text-align: center; padding: 40px;">
+                    <h3 id="game-title" style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--primary);"></h3>
+                    <div id="game-content" style="margin-bottom: 30px;">
+                        <!-- محتوى اللعبة سيظهر هنا -->
+                    </div>
+                    <button class="btn btn-secondary" onclick="resetGame()">لعبة جديدة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة المساعد الذكي -->
+    <section id="ai" class="page-section">
+        <div class="container">
+            <h2 class="section-title">المساعد الذكي للتعلم</h2>
+            
+            <div class="grid grid-2" style="gap: 50px; align-items: start;">
+                <div>
+                    <div class="card">
+                        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; color: var(--primary);">كيف يمكنني مساعدتك؟</h3>
+                        <p style="color: var(--text); margin-bottom: 20px; line-height: 1.7;">
+                            أنا مساعدك الذكي للتعلم. يمكنني الإجابة على أسئلتك حول المناهج، تقديم نصائح تعليمية، 
+                            مساعدتك في حل التمارين، وتقديم اقتراحات لتحسين تجربة التعلم.
+                        </p>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 30px; padding: 15px; background: var(--light); border-radius: 15px;">
+                            <div style="width: 60px; height: 60px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; margin-left: 15px;">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 700; margin-bottom: 5px;">مساعد التعلم الذكي</h4>
+                                <p style="color: var(--text); font-size: 0.9rem;">متاح دائمًا لمساعدتك</p>
+                            </div>
+                        </div>
+                        
+                        <div style="background: var(--light); border-radius: 15px; padding: 20px;">
+                            <h4 style="font-weight: 700; margin-bottom: 15px; color: var(--primary);">أسئلة شائعة</h4>
+                            <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e9ecef;">
+                                <p style="font-weight: 600; margin-bottom: 5px;">كيف أبدأ في تعلم القراءة؟</p>
+                                <p style="color: var(--text); font-size: 0.9rem;">ابدأ بدورة القراءة للمبتدئين التي تغطي الحروف والأصوات الأساسية</p>
+                            </div>
+                            <div style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #e9ecef;">
+                                <p style="font-weight: 600; margin-bottom: 5px;">كم من الوقت أحتاج لتعلم القراءة؟</p>
+                                <p style="color: var(--text); font-size: 0.9rem;">يعتمد على وقت الممارسة، لكن معظم المتعلمين يصلون للقراءة الأساسية خلال 2-3 أشهر</p>
+                            </div>
+                            <div>
+                                <p style="font-weight: 600; margin-bottom: 5px;">هل يمكنني التعلم من هاتفي؟</p>
+                                <p style="color: var(--text); font-size: 0.9rem;">نعم، المنصة متاحة على جميع الأجهزة بما في ذلك الهواتف الذكية</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message bot">
+                                مرحباً! أنا مساعدك الذكي للتعلم. كيف يمكنني مساعدتك اليوم؟
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 10px;">
+                            <input type="text" id="chat-input" placeholder="اكتب سؤالك هنا..." style="flex: 1; padding: 12px 15px; border: 1px solid #e9ecef; border-radius: 50px; outline: none;">
+                            <button class="btn btn-primary" onclick="sendMessage()" style="padding: 12px 20px;">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- صفحة اتصل بنا -->
+    <section id="contact" class="page-section">
+        <div class="container">
+            <h2 class="section-title">اتصل بنا</h2>
+            
+            <div class="grid grid-2" style="gap: 50px;">
+                <div>
+                    <div class="card">
+                        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--primary);">معلومات الاتصال</h3>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                            <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 15px;">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 700; margin-bottom: 5px;">العنوان</h4>
+                                <p style="color: var(--text);">شارع العربي بن مهيدي، الجزائر العاصمة</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                            <div style="width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 15px;">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 700; margin-bottom: 5px;">رقم الهاتف</h4>
+                                <p style="color: var(--text);">023 45 67 89</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center; margin-bottom: 25px;">
+                            <div style="width: 50px; height: 50px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 15px;">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 700; margin-bottom: 5px;">البريد الإلكتروني</h4>
+                                <p style="color: var(--text);">contact@alphabetisation.dz</p>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; align-items: center;">
+                            <div style="width: 50px; height: 50px; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; margin-left: 15px;">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 style="font-weight: 700; margin-bottom: 5px;">ساعات العمل</h4>
+                                <p style="color: var(--text);">الأحد إلى الخميس: 8:00 - 16:00</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="card">
+                        <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 30px; color: var(--primary);">أرسل رسالة</h3>
+                        
+                        <form style="display: flex; flex-direction: column; gap: 20px;">
+                            <div class="grid grid-2" style="gap: 15px;">
+                                <input type="text" placeholder="الاسم الكامل" style="padding: 12px 15px; border: 1px solid #e9ecef; border-radius: 10px; outline: none;">
+                                <input type="email" placeholder="البريد الإلكتروني" style="padding: 12px 15px; border: 1px solid #e9ecef; border-radius: 10px; outline: none;">
+                            </div>
+                            
+                            <input type="text" placeholder="الموضوع" style="padding: 12px 15px; border: 1px solid #e9ecef; border-radius: 10px; outline: none;">
+                            
+                            <textarea placeholder="الرسالة" rows="5" style="padding: 12px 15px; border: 1px solid #e9ecef; border-radius: 10px; outline: none; resize: vertical;"></textarea>
+                            
+                            <button type="submit" class="btn btn-primary" style="align-self: flex-start;">
+                                <i class="fas fa-paper-plane" style="margin-left: 8px;"></i>
+                                إرسال الرسالة
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="grid grid-4" style="gap: 40px; margin-bottom: 40px;">
+                <div class="footer-section">
+                    <h3>ملحقة الديوان الوطني لمحو الأمية</h3>
+                    <p style="color: #bdc3c7; margin-top: 15px; line-height: 1.7;">
+                        منصة تعليمية تفاعلية متكاملة تواكب التطور التكنولوجي في مجال محو الأمية وتعليم الكبار.
+                    </p>
+                    <div style="display: flex; gap: 15px; margin-top: 20px;">
+                        <a href="#" style="color: #bdc3c7; font-size: 1.2rem;"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: #bdc3c7; font-size: 1.2rem;"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <div class="footer-links">
+                        <a href="#" data-page="home">الرئيسية</a>
+                        <a href="#" data-page="about">عن المنصة</a>
+                        <a href="#" data-page="courses">الدروس</a>
+                        <a href="#" data-page="resources">الموارد</a>
+                        <a href="#" data-page="games">الألعاب</a>
+                        <a href="#" data-page="ai">المساعد الذكي</a>
+                        <a href="#" data-page="contact">اتصل بنا</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>الخدمات</h3>
+                    <div class="footer-links">
+                        <a href="#">التسجيل الإلكتروني</a>
+                        <a href="#">المناهج التفاعلية</a>
+                        <a href="#">الألعاب التعليمية</a>
+                        <a href="#">التقييم الذاتي</a>
+                        <a href="#">الدعم الفني</a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <div class="footer-links">
+                        <a href="tel:023456789">023 45 67 89</a>
+                        <a href="mailto:contact@alphabetisation.dz">contact@alphabetisation.dz</a>
+                        <a href="#">شارع العربي بن مهيدي، الجزائر العاصمة</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; text-align: center;">
+                <p style="color: #bdc3c7;">© 2023 ملحقة الديوان الوطني لمحو الأمية - ولاية الجزائر. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // حالة المستخدم
+        let currentUser = null;
+
+        // عناصر واجهة المستخدم
+        const authModal = document.getElementById('authModal');
+        const loginBtn = document.getElementById('login-btn');
+        const mobileLoginBtn = document.getElementById('mobile-login-btn');
+        const authButtons = document.getElementById('auth-buttons');
+        const userProfile = document.getElementById('user-profile');
+        const mobileUserProfile = document.getElementById('mobile-user-profile');
+        const logoutBtn = document.getElementById('logout-btn');
+        const mobileLogoutBtn = document.getElementById('mobile-logout-btn');
+        const authTabs = document.querySelectorAll('.auth-tab');
+        const authForms = document.querySelectorAll('.auth-form');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        // فتح نافذة التسجيل
+        loginBtn.addEventListener('click', openAuthModal);
+        mobileLoginBtn.addEventListener('click', openAuthModal);
+
+        // إغلاق النافذة عند النقر خارجها
+        authModal.addEventListener('click', function(e) {
+            if (e.target === authModal) {
+                closeAuthModal();
+            }
+        });
+
+        // القائمة المتنقلة
+        mobileMenuBtn.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // التنقل بين الصفحات
+        document.querySelectorAll('.nav-link, .footer-links a, .mobile-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const pageId = this.getAttribute('data-page');
+                if (pageId) {
+                    showPage(pageId);
+                    // إغلاق القائمة المتنقلة
+                    mobileMenu.classList.remove('active');
+                }
+            });
+        });
+
+        // تبديل بين تسجيل الدخول وإنشاء حساب
+        authTabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                const tabName = this.getAttribute('data-tab');
+                
+                // تحديد التبويب النشط
+                authTabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // إظهار النموذج المناسب
+                authForms.forEach(form => {
+                    form.classList.remove('active');
+                    if (form.id === `${tabName}Form`) {
+                        form.classList.add('active');
+                    }
+                });
+            });
+        });
+
+        // تسجيل الدخول
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            const password = this.querySelector('input[type="password"]').value;
+            
+            // محاكاة عملية تسجيل الدخول
+            simulateLogin(email, password);
+        });
+
+        // إنشاء حساب
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const password = this.querySelectorAll('input[type="password"]')[0].value;
+            const userType = this.querySelector('select').value;
+            
+            // محاكاة عملية إنشاء حساب
+            simulateRegister(name, email, password, userType);
+        });
+
+        // تسجيل الخروج
+        logoutBtn.addEventListener('click', logout);
+        mobileLogoutBtn.addEventListener('click', logout);
+
+        // وظائف مساعدة
+        function openAuthModal() {
+            authModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            mobileMenu.classList.remove('active');
+        }
+
+        function closeAuthModal() {
+            authModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function simulateLogin(email, password) {
+            // محاكاة عملية تسجيل الدخول
+            setTimeout(() => {
+                currentUser = {
+                    name: 'محمد أحمد',
+                    email: email,
+                    type: 'student',
+                    avatar: 'م'
+                };
+                
+                updateUI();
+                closeAuthModal();
+                
+                // إظهار رسالة نجاح
+                showNotification('تم تسجيل الدخول بنجاح!', 'success');
+            }, 1000);
+        }
+
+        function simulateRegister(name, email, password, userType) {
+            // محاكاة عملية إنشاء حساب
+            setTimeout(() => {
+                currentUser = {
+                    name: name,
+                    email: email,
+                    type: userType,
+                    avatar: name.charAt(0)
+                };
+                
+                updateUI();
+                closeAuthModal();
+                
+                // إظهار رسالة نجاح
+                showNotification('تم إنشاء الحساب بنجاح!', 'success');
+            }, 1000);
+        }
+
+        function logout() {
+            currentUser = null;
+            updateUI();
+            showNotification('تم تسجيل الخروج بنجاح', 'info');
+            mobileMenu.classList.remove('active');
+        }
+
+        function updateUI() {
+            if (currentUser) {
+                // تحديث واجهة المستخدم للمستخدم المسجل
+                authButtons.style.display = 'none';
+                userProfile.style.display = 'flex';
+                mobileUserProfile.style.display = 'block';
+                
+                document.getElementById('user-name').textContent = currentUser.name;
+                document.getElementById('user-avatar').textContent = currentUser.avatar;
+                document.getElementById('mobile-user-name').textContent = currentUser.name;
+                document.getElementById('mobile-user-avatar').textContent = currentUser.avatar;
+            } else {
+                // تحديث واجهة المستخدم للزائر
+                authButtons.style.display = 'block';
+                userProfile.style.display = 'none';
+                mobileUserProfile.style.display = 'none';
+            }
+        }
+
+        function showNotification(message, type) {
+            // إنشاء عنصر الإشعار
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: ${type === 'success' ? 'var(--primary)' : type === 'error' ? 'var(--secondary)' : 'var(--accent)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // إزالة الإشعار بعد 3 ثوان
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // إضافة أنيميشن للإشعارات
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // التحقق من حالة المستخدم عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            // محاكاة تحميل بيانات المستخدم من التخزين المحلي
+            const savedUser = localStorage.getItem('currentUser');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                updateUI();
+            }
+            
+            // حفظ بيانات المستخدم عند التحديث
+            window.addEventListener('beforeunload', function() {
+                if (currentUser) {
+                    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                } else {
+                    localStorage.removeItem('currentUser');
+                }
+            });
+
+            // تفعيل عداد الإحصائيات
+            const counters = document.querySelectorAll('.counter');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const counter = entry.target;
+                        const target = +counter.getAttribute('data-target');
+                        let count = 0;
+                        const increment = target / 200;
+                        
+                        const updateCount = () => {
+                            if (count < target) {
+                                count += increment;
+                                counter.innerText = Math.ceil(count);
+                                setTimeout(updateCount, 10);
+                            } else {
+                                counter.innerText = target;
+                            }
+                        };
+                        
+                        updateCount();
+                        observer.unobserve(counter);
+                    }
+                });
+            });
+
+            counters.forEach(counter => {
+                observer.observe(counter);
+            });
+
+            // إضافة تأثيرات للصفحة عند التحميل
+            const elements = document.querySelectorAll('.card, .btn');
+            elements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    el.style.transition = 'all 0.5s ease';
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
+            });
+        });
+
+        // وظيفة عرض الصفحات
+        function showPage(pageId) {
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // إظهار الصفحة المطلوبة
+            document.getElementById(pageId).classList.add('active');
+            
+            // التمرير إلى الأعلى
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // المحادثة مع المساعد الذكي
+        function sendMessage() {
+            const input = document.getElementById('chat-input');
+            const message = input.value.trim();
+            
+            if (message) {
+                // إضافة رسالة المستخدم
+                const userMessage = document.createElement('div');
+                userMessage.className = 'message user';
+                userMessage.textContent = message;
+                document.getElementById('chat-messages').appendChild(userMessage);
+                
+                // مسح حقل الإدخال
+                input.value = '';
+                
+                // محاكاة رد المساعد
+                setTimeout(() => {
+                    const botMessage = document.createElement('div');
+                    botMessage.className = 'message bot';
+                    
+                    // ردود ذكية بناءً على السؤال
+                    if (message.includes('منهج') || message.includes('كتاب') || message.includes('مادة')) {
+                        botMessage.textContent = 'يمكنني مساعدتك في العثور على المناهج المناسبة. هل تبحث عن مواد للمستوى المبتدئ أم المتقدم؟';
+                    } else if (message.includes('تسجيل') || message.includes('انضم')) {
+                        botMessage.textContent = 'لتسجيل في برامجنا، يمكنك زيارة صفحة التسجيل أو الاتصال بنا على الرقم 023 45 67 89';
+                    } else if (message.includes('مساعدة') || message.includes('مساعده')) {
+                        botMessage.textContent = 'أنا هنا لمساعدتك! يمكنني الإجابة على أسئلتك حول المناهج، البرامج، التسجيل، وغيرها. ما الذي تحتاج مساعدة فيه؟';
+                    } else if (message.includes('لعبة') || message.includes('ألعاب')) {
+                        botMessage.textContent = 'لدينا ألعاب تعليمية ممتعة! يمكنك زيارة صفحة الألعاب لتجربة ألعاب تركيب الكلمات، الحساب السريع، والذاكرة.';
+                    } else {
+                        botMessage.textContent = 'شكراً على سؤالك! سأحاول مساعدتك بأفضل طريقة. هل يمكنك توضيح استفسارك أكثر؟';
+                    }
+                    
+                    document.getElementById('chat-messages').appendChild(botMessage);
+                    
+                    // التمرير إلى الأسفل
+                    const chatMessages = document.getElementById('chat-messages');
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        // السماح بإرسال الرسالة بالضغط على Enter
+        document.getElementById('chat-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // الألعاب التعليمية
+        function startGame(gameType) {
+            const gameArea = document.getElementById('game-area');
+            const gameTitle = document.getElementById('game-title');
+            const gameContent = document.getElementById('game-content');
+            
+            gameArea.style.display = 'block';
+            
+            switch(gameType) {
+                case 'word':
+                    gameTitle.textContent = 'لعبة تركيب الكلمات';
+                    gameContent.innerHTML = `
+                        <p style="margin-bottom: 20px; font-size: 1.1rem;">اسحب الحروف لتكوين الكلمة الصحيحة</p>
+                        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;">
+                            <div style="padding: 15px; background: var(--light); border-radius: 10px; font-size: 1.5rem; cursor: move;">ك</div>
+                            <div style="padding: 15px; background: var(--light); border-radius: 10px; font-size: 1.5rem; cursor: move;">ت</div>
+                            <div style="padding: 15px; background: var(--light); border-radius: 10px; font-size: 1.5rem; cursor: move;">ا</div>
+                            <div style="padding: 15px; background: var(--light); border-radius: 10px; font-size: 1.5rem; cursor: move;">ب</div>
+                        </div>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <div style="width: 60px; height: 60px; border: 2px dashed #ccc; border-radius: 10px;"></div>
+                            <div style="width: 60px; height: 60px; border: 2px dashed #ccc; border-radius: 10px;"></div>
+                            <div style="width: 60px; height: 60px; border: 2px dashed #ccc; border-radius: 10px;"></div>
+                            <div style="width: 60px; height: 60px; border: 2px dashed #ccc; border-radius: 10px;"></div>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'math':
+                    gameTitle.textContent = 'لعبة الحساب السريع';
+                    gameContent.innerHTML = `
+                        <p style="margin-bottom: 20px; font-size: 1.1rem;">حل المسألة الحسابية التالية:</p>
+                        <div style="font-size: 2rem; font-weight: bold; margin-bottom: 20px;">5 + 3 = ?</div>
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button class="btn" style="background: var(--light);" onclick="checkAnswer(7)">7</button>
+                            <button class="btn" style="background: var(--light);" onclick="checkAnswer(8)">8</button>
+                            <button class="btn" style="background: var(--light);" onclick="checkAnswer(9)">9</button>
+                        </div>
+                    `;
+                    break;
+                    
+                case 'memory':
+                    gameTitle.textContent = 'لعبة الذاكرة';
+                    gameContent.innerHTML = `
+                        <p style="margin-bottom: 20px; font-size: 1.1rem;">تذكر موقع الكلمات المتشابهة</p>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 300px; margin: 0 auto;">
+                            <div style="width: 60px; height: 60px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer;">أ</div>
+                            <div style="width: 60px; height: 60px; background: var(--secondary); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer;">ب</div>
+                            <div style="width: 60px; height: 60px; background: var(--accent); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer;">ت</div>
+                            <div style="width: 60px; height: 60px; background: var(--primary); color: white; display: flex; align-items: center; justify-content: center; border-radius: 10px; cursor: pointer;">أ</div>
+                        </div>
+                    `;
+                    break;
+            }
+            
+            // التمرير إلى منطقة اللعبة
+            gameArea.scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function checkAnswer(answer) {
+            if (answer === 8) {
+                alert('إجابة صحيحة! أحسنت!');
+            } else {
+                alert('إجابة خاطئة، حاول مرة أخرى!');
+            }
+        }
+        
+        function resetGame() {
+            document.getElementById('game-area').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
